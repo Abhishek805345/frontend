@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6a6a, #ff9a9a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 35px 30px;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #e63946;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            background: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(230,57,70,0.4);
+        }
+
+        button.secondary {
+            margin-top: 12px;
+            background: #f1f1f1;
+            color: #333;
+        }
+
+        button.secondary:hover {
+            box-shadow: none;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="icon">🚫</div>
+    <h2>User Not Found</h2>
+
+    <p>
+        The email address you entered is not registered with us.
+        Please check your email or create a new account.
+    </p>
+
+    <button onclick="window.location.href='/register'">
+        Create New Account
+    </button>
+
+    <button class="secondary" onclick="window.location.href='/forgot-password'">
+        Try Another Email
+    </button>
+</div>
+
+</body>
+</html>

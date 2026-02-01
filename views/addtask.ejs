@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e3f2fd, #ffffff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+      color: #0d6efd;
+    }
+
+    .todo-container {
+      background: #ffffff;
+      width: 420px;
+      max-width: 95%;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    .todo-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 2px rgba(13,110,253,0.15);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-add {
+      background: #0d6efd;
+      color: #ffffff;
+    }
+
+    .btn-add:hover {
+      background: #084298;
+      transform: translateY(-2px);
+    }
+
+    .btn-get {
+      background: #198754;
+      color: #ffffff;
+    }
+
+    .btn-get:hover {
+      background: #146c43;
+      transform: translateY(-2px);
+    }
+
+    .btn-get a {
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Hey <%= data.name %>, welcome back 👋</h1>
+
+<div class="todo-container">
+  <h2>Todo List</h2>
+
+  <form action="/data" method="POST">
+    <label for="task">Task Name</label>
+    <input type="text" id="task" name="task" placeholder="Enter a task" required>
+
+    <label for="startdate">Date to start</label>
+    <input type="date" id="startdate" name="date" required>
+    <input type="hidden" value="<%=data.id%>" name="userid">
+
+    <div class="btn-group">
+      <button type="submit" class="btn-add">Add Task</button>
+      <button type="button" class="btn-get">
+        <a href="/getdata">Get Data</a>
+      </button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
