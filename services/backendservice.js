@@ -1,5 +1,5 @@
 exports.connectme=async (data)=>{
-  const responce= await fetch("http://localhost:3000/api/todo/login",{
+  const responce= await fetch("http://todobackend-eosin.vercel.app/api/todo/login",{
     method:"POST",
         headers: {
       "Content-Type": "application/json"
@@ -15,18 +15,18 @@ exports.connectme=async (data)=>{
 }
 
 exports.getdata=async (id)=>{
-  const responce=await fetch(`http://localhost:3000/api/mydata/${id}`);
+  const responce=await fetch(`http://todobackend-eosin.vercel.app/api/mydata/${id}`);
   const result=await responce.json();
   return result;
 }
 exports.getbyid=async (id)=>{
   console.log('received id in services',id);
-  const responce=await fetch(`http://localhost:3000/api/edit/${id}`);
+  const responce=await fetch(`http://todobackend-eosin.vercel.app/api/edit/${id}`);
    const result= await responce.json();
    return result;
 }
 exports.updatedata=async (data,id)=>{
-  const responce=await fetch(`http://localhost:3000/api/accept/data/${id}`,{
+  const responce=await fetch(`http://todobackend-eosin.vercel.app/api/accept/data/${id}`,{
     method:'POST',
     headers:{
       "Content-Type":"application/json"
@@ -37,13 +37,13 @@ exports.updatedata=async (data,id)=>{
   return result;
 }
 exports.delinfoservice=async (id)=>{
-  const responce=await fetch(`http://localhost:3000/api/info/delete/${id}`,{
+  const responce=await fetch(`http://todobackend-eosin.vercel.app/api/info/delete/${id}`,{
     method:'DELETE'
     })  
 }
 //register authentication service
 exports.saveregisterdata=async (data)=>{
-  const responce=await fetch('http://localhost:3000/api/post/register',{
+  const responce=await fetch('http://todobackend-eosin.vercel.app/api/post/register',{
     method:"POST",
     headers:{
       "Content-Type":"application/json"
@@ -55,7 +55,7 @@ exports.saveregisterdata=async (data)=>{
 }
 //login authenticaion service
 exports.logincheck=async (data)=>{
-  const responce=await fetch('http://localhost:3000/api/post/login',{
+  const responce=await fetch('http://todobackend-eosin.vercel.app/api/post/login',{
     method:"POST",
     headers:{
       "Content-Type":"application/json"
@@ -68,7 +68,7 @@ exports.logincheck=async (data)=>{
 
 //otp api
 exports.sendotp=async (data)=>{
-  const responce= await fetch("http://localhost:3000/api/send/otp",{
+  const responce= await fetch("http://todobackend-eosin.vercel.app/api/send/otp",{
     method:"post",
     headers:{
       "Content-Type":"application/json"
@@ -80,7 +80,7 @@ exports.sendotp=async (data)=>{
 }
 //verify otp
 exports.verifyotp=async (data,id)=>{
-  const responce=await fetch(`http://localhost:3000/api/verify/otp/${id}`,{
+  const responce=await fetch(`http://todobackend-eosin.vercel.app/api/verify/otp/${id}`,{
     method:'post',
     headers:{
       "Content-Type":"application/json"
@@ -92,7 +92,7 @@ exports.verifyotp=async (data,id)=>{
 }
 //reset password
 exports.resetpas=async (data,id)=>{
-  const responce=await fetch(`http://localhost:3000/api/reset/password/${id}`,{
+  const responce=await fetch(`http://todobackend-eosin.vercel.app/api/reset/password/${id}`,{
     method:"post",
     headers:{
       "Content-Type":"application/json"
