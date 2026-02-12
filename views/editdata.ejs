@@ -1,135 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Todo App</title>
+  <meta charset="UTF-8" />
+  <title>Edit Task – TodoSpace</title>
 
-    <style>
-       /* Reset */
-* {
-    box-sizing: border-box;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
 
-/* Page */
-body {
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
+    body {
+      background: #f7f8fa;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* Main container */
-.todo-container {
-    background: #ffffff;
-    width: 900px;
-    max-width: 95%;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-}
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px;
+    }
 
-/* Heading */
-.todo-container h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #2e7d32; /* green */
-    letter-spacing: 0.6px;
-}
+    /* Card */
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
 
-/* Center the form */
-#tasks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    /* Header */
+    .header {
+      margin-bottom: 24px;
+      text-align: center;
+    }
 
-/* Form card */
-#tasks form {
-    background: #f8f9fa;
-    padding: 25px 30px;
-    border-radius: 14px;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
+    .header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 6px;
+    }
 
-/* Labels */
-#tasks label {
-    font-weight: 600;
-    color: #333;
-    display: block;
-    margin-bottom: 6px;
-}
+    .header p {
+      font-size: 14px;
+      color: #6b7280;
+    }
 
-/* Inputs */
-#tasks input[type="text"],
-#tasks input[type="date"] {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin-bottom: 18px;
-    font-size: 14px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
+    /* Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
 
-/* Input focus */
-#tasks input:focus {
-    outline: none;
-    border-color: #28a745;
-    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
-}
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
 
-/* Green button */
-#tasks button {
-    width: 100%;
-    padding: 12px;
-    background: #28a745;       /* green */
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
+    input[type="text"],
+    input[type="date"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      outline: none;
+    }
 
-/* Button hover */
-#tasks button:hover {
-    background: #1e7e34;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.35);
-}
+    input:focus {
+      border-color: #6c5ce7;
+      box-shadow: 0 0 0 3px rgba(108,92,231,0.15);
+    }
 
-/* Button active */
-#tasks button:active {
-    transform: scale(0.98);
-}
+    /* Status toggle */
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
 
+    .status input {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
 
-    </style>
+    .status span {
+      font-size: 14px;
+      color: #374151;
+    }
+
+    /* Button */
+    button {
+      margin-top: 10px;
+      padding: 12px;
+      background: #6c5ce7;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #5848c2;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .card {
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="todo-container">
-    <h2>Todo List</h2>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h1>Edit Task</h1>
+        <p>Update your task details</p>
+      </div>
 
-    <div id="tasks">
-      <form action="/accept/data/<%=data._id%>" method="POST">
-        <label for="task">Task:</label><br>
-        <input type="text" id="task" value="<%=data.task%>" name="task"><br>
-        <label for="startdate">Date</label><br>
-        <input type="date" id="startdate" value="<%=data.date%>" name="date"><br>
-        <label for="completeness" >Status:(complete or not)</label>
-        <input type="checkbox" id="completeness" name="status" value="completed"><br>
-        <button value="submit">Update</button>
+      <form action="/accept/data/<%= data._id %>" method="POST">
+        <div>
+          <label for="task">Task Name</label>
+          <input
+            type="text"
+            id="task"
+            name="task"
+            value="<%= data.task %>"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="startdate">Due Date</label>
+          <input
+            type="date"
+            id="startdate"
+            name="date"
+            value="<%= data.date %>"
+            required
+          />
+        </div>
+
+        <div>
+          <label>Status</label>
+          <div class="status">
+            <input
+              type="checkbox"
+              id="completeness"
+              name="status"
+              value="completed"
+              <%= data.status === "completed" ? "checked" : "" %>
+            />
+            <span>Mark as completed</span>
+          </div>
+        </div>
+
+        <button type="submit">Update Task</button>
       </form>
     </div>
-</div>
+  </div>
 
 </body>
 </html>

@@ -1,149 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Todo App</title>
+  <meta charset="UTF-8" />
+  <title>TodoSpace – Tasks</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", "Segoe UI", sans-serif;
+    }
 
-        body {
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            background: linear-gradient(135deg, #e3f2fd, #ffffff);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+    body {
+      background: #f7f8fa;
+      min-height: 100vh;
+      display: flex;
+    }
 
-        /* Main container */
-        .todo-container {
-            background: #ffffff;
-            width: 900px;
-            max-width: 95%;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-        }
+    /* ================= SIDEBAR ================= */
+    .sidebar {
+      width: 230px;
+      background: #ffffff;
+      border-right: 1px solid #e5e7eb;
+      padding: 20px;
+      flex-shrink: 0;
+    }
 
-        /* Heading */
-        .todo-container h2 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #333;
-            letter-spacing: 0.5px;
-        }
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #6c5ce7;
+      margin-bottom: 30px;
+    }
 
-        /* Top action bar */
-        .top-actions {
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 14px;
-        }
+    .menu a {
+      display: block;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      color: #333;
+      border-radius: 8px;
+      font-size: 14px;
+    }
 
-        /* Home button */
-        .home-btn {
-            padding: 6px 16px;
-            background: #198754;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
+    .menu a.active,
+    .menu a:hover {
+      background: #f0edff;
+      color: #6c5ce7;
+      font-weight: 600;
+    }
 
-        .home-btn:hover {
-            background: #146c43;
-            transform: scale(1.05);
-        }
+    /* ================= MAIN ================= */
+    .main {
+      flex: 1;
+      padding: 30px 40px;
+    }
 
-        /* Grid layout for tasks */
-        #tasks {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 10px;
-        }
+    .header {
+      max-width: 1100px;
+      margin-bottom: 25px;
+    }
 
-        /* Individual task card */
-        .task {
-            background: #f8f9fa;
-            padding: 10px 12px;
-            border-left: 5px solid #28a745;
-            border-radius: 10px;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.4;
-        }
+    .header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #111827;
+    }
 
-        .task strong {
-            font-weight: 600;
-        }
+    /* ================= TASK GRID ================= */
+    .tasks-grid {
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
 
-        /* Hover */
-        .task:hover {
-            background: #eef7f1;
-            transform: translateY(-2px);
-            transition: 0.2s ease;
-        }
+    .task-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-        /* Buttons inside task */
-        .task button {
-            margin-top: 8px;
-            padding: 6px 14px;
-            background: #0d6efd;
-            color: #ffffff;
-            border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
+    .task-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }
 
-        .task button:hover {
-            background: #084298;
-            transform: scale(1.05);
-        }
+    .task-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
+    }
 
-        /* Remove underline from links */
-        .task a {
-            text-decoration: none;
-        }
-    </style>
+    .task-meta {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .status {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .status.completed {
+      color: #16a34a;
+    }
+
+    .status.pending {
+      color: #f59e0b;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .task-actions a {
+      text-decoration: none;
+      flex: 1;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-edit {
+      background: #6c5ce7;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background: #5848c2;
+    }
+
+    .btn-delete {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background: #dc2626;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .menu {
+        display: flex;
+        gap: 10px;
+      }
+
+      .menu a {
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+
+      .main {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="todo-container">
-    <h2>Todo List</h2>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">TodoSpace</div>
+    <div class="menu">
+      <a href="/addone">Add Tasks</a>
+      <a href="/getdata" class="active">Tasks</a>
+      <a href="/completed">Completed</a>
+    </div>
+  </div>
 
-    <!-- Home Button -->
-    <div class="top-actions">
-           <a href="/addone"> <button class="home-btn">🏠 Home</button></a>
+  <!-- MAIN -->
+  <div class="main">
+    <div class="header">
+      <h1>Your Tasks</h1>
     </div>
 
-    <!-- Tasks -->
-    <div id="tasks">
-        <% data.forEach(item => { %>
-            <div class="task">
-                <div><strong>📝 Task:</strong> <%= item.task %></div>
-                <div><strong>📅 Date:</strong> <%= item.date %></div>
+    <div class="tasks-grid">
+      <% data.forEach(item => { %>
+        <div class="task-card">
+          <div class="task-title"><%= item.task %></div>
+          <div class="task-meta">Due: <%= item.date %></div>
 
-                <% if (item.status === "completed") { %>
-                    <div><strong>📈 Status:</strong> Completed ✅</div>
-                <% } else { %>
-                    <div><strong>📈 Status:</strong> Pending..</div>
-                <% } %>
+          <% if (item.status === "completed") { %>
+            <div class="status completed">Completed</div>
+          <% } else { %>
+            <div class="status pending">Pending</div>
+          <% } %>
 
-                <a href="/edit/<%= item._id %>"><button>Edit</button></a>
-                <a href="/task/delete/<%= item._id %>"><button>Delete</button></a>
-            </div>
-        <% }) %>
+          <div class="task-actions">
+            <a href="/edit/<%= item._id %>">
+              <button class="btn btn-edit">Edit</button>
+            </a>
+            <a href="/task/delete/<%= item._id %>">
+              <button class="btn btn-delete">Delete</button>
+            </a>
+          </div>
+        </div>
+      <% }) %>
     </div>
-</div>
+  </div>
 
 </body>
 </html>

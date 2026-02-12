@@ -16,7 +16,7 @@ home.get('/',(req,res,next)=>{
 })
 //login
 home.get('/login',(req,res,next)=>{
-  res.sendFile(path.join(__dirname,'public','login.html'));
+  res.render('login',{error:[]});
 })
 //post login
 let userdetail;
@@ -28,7 +28,7 @@ home.post('/post/login',async (req,res,next)=>{
   if (result.login==true){
     res.render('addtask',{data:result});
   }else if (result.login==false){
-    res.send('Something went wrong,Please check your details');
+    res.render('login',{error:['Try again something went wrong or may be Register first']})
   }
 })
 //register
@@ -59,6 +59,17 @@ home.get('/getdata',async (req,res,next)=>{
   const data=await services.getdata(userdetail.id);
   console.log('fetched data is ',data);
   res.render('new',{data:data});
+})
+home.get('/completed',async (req,res,next)=>{
+  let array=[];
+    const data=await services.getdata(userdetail.id);
+  console.log('fetched data is ',data);
+  data.forEach(task=>{
+    if (task.status=='completed'){
+      array.push(task);
+    }
+  })
+  res.render('new',{data:array});
 })
 
 //get data to edit
