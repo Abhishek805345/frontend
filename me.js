@@ -12,7 +12,7 @@ home.set('view engine','ejs');
 home.set('views','views');
 //home
 home.get('/',(req,res,next)=>{
-  res.sendFile(path.join(__dirname,'public', 'Index.html'));
+  res.sendFile(path.join(__dirname,'public', 'index.html'));
 })
 //login
 home.get('/login',(req,res,next)=>{
