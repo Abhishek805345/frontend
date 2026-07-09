@@ -132,5 +132,9 @@ home.post('/reset-password/:id',async (req,res,next)=>{
   res.redirect('/');
 })
 
-
+port=3001;
+ 
+home.listen(port,()=>{
+  console.log(`Your server is running on port http://localhost:${port}`);
+})
 
