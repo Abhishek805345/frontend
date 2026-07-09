@@ -132,5 +132,7 @@ home.post('/reset-password/:id',async (req,res,next)=>{
   res.redirect('/');
 })
 
-module.exports = home;
+home.listen(3001,()=>{
+  console.log("server is on");
+});
 
