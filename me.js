@@ -9,7 +9,7 @@ home.use(express.json());
 home.use(express.urlencoded({extended:true}));
 
 home.set('view engine','ejs');
-home.set('views','views');
+home.set('views', path.join(__dirname, 'views'));
 //home
 home.get('/',(req,res,next)=>{
   res.sendFile(path.join(__dirname,'public', 'index.html'));
